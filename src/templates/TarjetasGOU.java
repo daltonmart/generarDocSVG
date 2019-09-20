@@ -169,7 +169,7 @@ public class TarjetasGOU extends javax.swing.JFrame {
             String emailgou = jTextField4.getText();
             String emailpersonal = jTextField5.getText();
 
-            template = cfg.getTemplate("src/tarjetasGOU.svg");
+            template = cfg.getTemplate("src/diplomaEvento.svg");
             //template = cfg.getTemplate("src/tarjeta1.svg");
 
             Scanner scan = new Scanner(new File("src/tarjetasGOU.csv"));

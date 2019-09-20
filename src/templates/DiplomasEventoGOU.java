@@ -158,7 +158,6 @@ public class DiplomasEventoGOU extends javax.swing.JFrame {
         final ImageTagRegistry registry = ImageTagRegistry.getRegistry();
         registry.register(new PNGRegistryEntry());
 
-
         try {
             // Build the data-model
             // pasar datos del formulario al template
@@ -210,56 +209,56 @@ public class DiplomasEventoGOU extends javax.swing.JFrame {
                     String svgURI = svgFile.toURI().toString();
                     TranscoderInput svgInputFile = new TranscoderInput(svgURI);
 
-                    OutputStream outstream = new FileOutputStream(archivoPNG);
-                    BufferedOutputStream bos = new BufferedOutputStream(outstream);
-                    TranscoderOutput output = new TranscoderOutput(bos);
-
-                    String imageType = "PNG";
-                    if ("PNG".equals(imageType)) {
-                        // write as png
-                        Transcoder pngTranscoder = new PNGTranscoder();
-                        pngTranscoder.addTranscodingHint(PNGTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(0.084666f));
-                        try {
-                            pngTranscoder.transcode(svgInputFile, output);
-                        } catch (TranscoderException ex) {
-                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else if ("JPEG".equals(imageType)) {
-                        // write as jpeg
-                        Transcoder jpegTranscoder = new JPEGTranscoder();
-                        jpegTranscoder.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, new Float(1.0));
-                        try {
-                            jpegTranscoder.transcode(svgInputFile, output);
-                        } catch (TranscoderException ex) {
-                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else if ("TIFF".equals(imageType)) {
-                        // write as tiff
-                        Transcoder tiffTranscoder = new TIFFTranscoder();
-                        tiffTranscoder.addTranscodingHint(TIFFTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(25F / 300f));
-                        tiffTranscoder.addTranscodingHint(TIFFTranscoder.KEY_FORCE_TRANSPARENT_WHITE, true);
-                        try {
-                            tiffTranscoder.transcode(svgInputFile, output);
-                        } catch (TranscoderException ex) {
-                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else if ("PDF".equals(imageType)) {
-                        // write as pdf
-                        Transcoder pdfTranscoder = new PDFTranscoder();
-                        pdfTranscoder.addTranscodingHint(PDFTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(0.084666f));
-                        try {
-                            pdfTranscoder.transcode(svgInputFile, output);
-                        } catch (TranscoderException ex) {
-                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        System.out.println("imageType mal definido el tipo de imagen");
-                        System.exit(1);
-                    }
+//                    OutputStream outstream = new FileOutputStream(archivoPNG);
+//                    BufferedOutputStream bos = new BufferedOutputStream(outstream);
+//                    TranscoderOutput output = new TranscoderOutput(bos);
+//
+//                    String imageType = "XXXXX";
+//                    if ("PNG".equals(imageType)) {
+//                        // write as png
+//                        Transcoder pngTranscoder = new PNGTranscoder();
+//                        pngTranscoder.addTranscodingHint(PNGTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(0.084666f));
+//                        try {
+//                            pngTranscoder.transcode(svgInputFile, output);
+//                        } catch (TranscoderException ex) {
+//                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//                    } else if ("JPEG".equals(imageType)) {
+//                        // write as jpeg
+//                        Transcoder jpegTranscoder = new JPEGTranscoder();
+//                        jpegTranscoder.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, new Float(1.0));
+//                        try {
+//                            jpegTranscoder.transcode(svgInputFile, output);
+//                        } catch (TranscoderException ex) {
+//                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//                    } else if ("TIFF".equals(imageType)) {
+//                        // write as tiff
+//                        Transcoder tiffTranscoder = new TIFFTranscoder();
+//                        tiffTranscoder.addTranscodingHint(TIFFTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(25F / 300f));
+//                        tiffTranscoder.addTranscodingHint(TIFFTranscoder.KEY_FORCE_TRANSPARENT_WHITE, true);
+//                        try {
+//                            tiffTranscoder.transcode(svgInputFile, output);
+//                        } catch (TranscoderException ex) {
+//                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//                    } else if ("PDF".equals(imageType)) {
+//                        // write as pdf
+//                        Transcoder pdfTranscoder = new PDFTranscoder();
+//                        pdfTranscoder.addTranscodingHint(PDFTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(0.084666f));
+//                        try {
+//                            pdfTranscoder.transcode(svgInputFile, output);
+//                        } catch (TranscoderException ex) {
+//                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//                    } else {
+//                        System.out.println("imageType mal definido el tipo de imagen");
+//                        System.exit(1);
+//                    }
                     //close the stream
-                    outstream.flush();
-                    outstream.close();
-                    bos.close();
+//                    outstream.flush();
+//                    outstream.close();
+//                    bos.close();
 //*****************************************************************************************************                    
 
                     //PNGTranscoder t = new PNGTranscoder() ;
@@ -315,7 +314,7 @@ public class DiplomasEventoGOU extends javax.swing.JFrame {
         } catch (IOException | TemplateException e) {
             e.printStackTrace();
         }
-
+      System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public String svg2png(String archivoSVG) {
