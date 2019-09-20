@@ -168,7 +168,7 @@ public class DiplomasEventoGOU extends javax.swing.JFrame {
             String emailgou = jTextField4.getText();
             String emailpersonal = jTextField5.getText();
 
-          //  template = cfg.getTemplate("src/tarjetasGOU.svg");
+            //  template = cfg.getTemplate("src/tarjetasGOU.svg");
             template = cfg.getTemplate("src/diplomaEvento.svg");
             //template = cfg.getTemplate("src/tarjeta1.svg");
 
@@ -209,104 +209,14 @@ public class DiplomasEventoGOU extends javax.swing.JFrame {
                     String svgURI = svgFile.toURI().toString();
                     TranscoderInput svgInputFile = new TranscoderInput(svgURI);
 
-//                    OutputStream outstream = new FileOutputStream(archivoPNG);
-//                    BufferedOutputStream bos = new BufferedOutputStream(outstream);
-//                    TranscoderOutput output = new TranscoderOutput(bos);
-//
-//                    String imageType = "XXXXX";
-//                    if ("PNG".equals(imageType)) {
-//                        // write as png
-//                        Transcoder pngTranscoder = new PNGTranscoder();
-//                        pngTranscoder.addTranscodingHint(PNGTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(0.084666f));
-//                        try {
-//                            pngTranscoder.transcode(svgInputFile, output);
-//                        } catch (TranscoderException ex) {
-//                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    } else if ("JPEG".equals(imageType)) {
-//                        // write as jpeg
-//                        Transcoder jpegTranscoder = new JPEGTranscoder();
-//                        jpegTranscoder.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, new Float(1.0));
-//                        try {
-//                            jpegTranscoder.transcode(svgInputFile, output);
-//                        } catch (TranscoderException ex) {
-//                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    } else if ("TIFF".equals(imageType)) {
-//                        // write as tiff
-//                        Transcoder tiffTranscoder = new TIFFTranscoder();
-//                        tiffTranscoder.addTranscodingHint(TIFFTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(25F / 300f));
-//                        tiffTranscoder.addTranscodingHint(TIFFTranscoder.KEY_FORCE_TRANSPARENT_WHITE, true);
-//                        try {
-//                            tiffTranscoder.transcode(svgInputFile, output);
-//                        } catch (TranscoderException ex) {
-//                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    } else if ("PDF".equals(imageType)) {
-//                        // write as pdf
-//                        Transcoder pdfTranscoder = new PDFTranscoder();
-//                        pdfTranscoder.addTranscodingHint(PDFTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(0.084666f));
-//                        try {
-//                            pdfTranscoder.transcode(svgInputFile, output);
-//                        } catch (TranscoderException ex) {
-//                            Logger.getLogger(DiplomasEventoGOU.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    } else {
-//                        System.out.println("imageType mal definido el tipo de imagen");
-//                        System.exit(1);
-//                    }
-                    //close the stream
-//                    outstream.flush();
-//                    outstream.close();
-//                    bos.close();
-//*****************************************************************************************************                    
-
-                    //PNGTranscoder t = new PNGTranscoder() ;
-                    //t.createImage(3155, 1973);
-/*                    JPEGTranscoder trans = new JPEGTranscoder();
-                    trans.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, (float) .95);
-                    String svgURI = new File(archivoSVG).toURL().toString();
-                    TranscoderInput input = new TranscoderInput(svgURI);
-
-                    OutputStream ostream = new FileOutputStream(archivoPNG);
-                    TranscoderOutput output = new TranscoderOutput(ostream);
-
-                    /*
-                     JPEGTranscoder t = new JPEGTranscoder();
-                     // Set the transcoding hints.
-                     t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, new Float(.95));
-
-                     TranscoderInput input = new TranscoderInput(new FileInputStream(archivoSVG));
-                     OutputStream ostream = new FileOutputStream(archivoPNG);
-                     TranscoderOutput output = new TranscoderOutput(ostream);
-                     //t.addTranscodingHint(PNGTranscoder.KEY_WIDTH, (float) scaledSize.getX());
-                     //t.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, (float) scaledSize.getY());
-                     //t.addTranscodingHint(PNGTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, 25.4f / 200.0f);
-
-                     // Create a JPEG transcoder
-                     // Create the transcoder input.
-                     //         FileOutputStream filePNG = new FileOutputStream(new File(archivoPNG));
-                     //         TranscoderInput input = new TranscoderInput(new File(archivoSVG).toURI().toString());
-                     // FileWriter ostream = new FileWriter(new File(archivoPNG));
-                     //         TranscoderOutput output = new TranscoderOutput(filePNG);
-                     // Create the transcoder output.
-                     //OutputStream ostream = new FileOutputStream(archivoJPEG);
-                     //TranscoderOutput output = new TranscoderOutput(ostream);
-                   
+                    // inkscape Diploma_*.svg -A Diploma_*.pdf
                     try {
-                        // Save the image.
-                        trans.transcode(input, output);
-
-                    } catch (TranscoderException ex) {
-                        Logger.getLogger(TarjetasGOU.class.getName()).log(Level.SEVERE, null, ex);
+                        String[] cmd = {"/usr/bin/inkscape", "-s", archivoSVG, "--export-pdf", archivoPDF}; //Comando de apagado en windows
+                        Runtime.getRuntime().exec(cmd);
+                    } catch (IOException ioe) {
+                        System.out.println(ioe);
                     }
-                     */
-                    // Flush and close the stream.
-                    //        filePNG.flush();
-                    //        filePNG.close();
-                    /*                   ostream.flush();
-                    ostream.close();
-                     */
+
                 }
             }
             //svg_URI_input = Paths.get(archivoSVG).toUri().toURL().toString();
@@ -314,7 +224,7 @@ public class DiplomasEventoGOU extends javax.swing.JFrame {
         } catch (IOException | TemplateException e) {
             e.printStackTrace();
         }
-      System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public String svg2png(String archivoSVG) {
