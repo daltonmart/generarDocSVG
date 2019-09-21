@@ -20,13 +20,9 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import org.apache.batik.ext.awt.image.codec.png.PNGRegistryEntry;
 import org.apache.batik.ext.awt.image.spi.ImageTagRegistry;
-import org.apache.batik.transcoder.Transcoder;
 import org.apache.batik.transcoder.TranscoderException;
-import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
-import org.apache.batik.transcoder.image.TIFFTranscoder;
-import org.apache.fop.svg.PDFTranscoder;
 
 public class DiplomasEventoGOU extends javax.swing.JFrame {
 
@@ -152,7 +148,7 @@ public class DiplomasEventoGOU extends javax.swing.JFrame {
 //Freemarker configuration object
         SimpleDateFormat sdf;
         Calendar c;
-        Template template = null;
+        Template template;
         Configuration cfg = new Configuration();
 
         final ImageTagRegistry registry = ImageTagRegistry.getRegistry();
@@ -192,35 +188,32 @@ public class DiplomasEventoGOU extends javax.swing.JFrame {
 //                data.put("emailpersonal", emailpersonal);
 
                 // Console output
-                Writer out = new OutputStreamWriter(System.out);
+  //              Writer out = new OutputStreamWriter(System.out);
+ //               template.process(data, out);
+//                out.flush();
 
-                template.process(data, out);
-                out.flush();
-                String archivoSVG = "src/Diploma_" + i.toString() + "(" + nombre + ").svg";
-                String archivoPNG = "src/Diploma_" + i.toString() + "(" + nombre + ").png";
-                String archivoPDF = "src/Diploma_" + i.toString() + "(" + nombre + ").pdf";
+                String nombreArchivoSalida = "src/Diploma_" + String.format("%03d", i); //+ "(" + nombre + ")"; 
+                String archivoSVG = nombreArchivoSalida + ".svg"; 
+                String archivoPNG = nombreArchivoSalida + ".png";
+                String archivoPDF = nombreArchivoSalida + ".pdf";                 
+                System.out.println("Archivo procesado :" + archivoSVG);
 
                 try (Writer file = new FileWriter(new File(archivoSVG))) {
                     template.process(data, file);
                     file.flush();
-//*****************************************************************************************************
                     // set up the svg input
                     File svgFile = new File(archivoSVG);
                     String svgURI = svgFile.toURI().toString();
                     TranscoderInput svgInputFile = new TranscoderInput(svgURI);
-
-                    // inkscape Diploma_*.svg -A Diploma_*.pdf
                     try {
-                        String[] cmd = {"/usr/bin/inkscape", "-s", archivoSVG, "--export-pdf", archivoPDF}; //Comando de apagado en windows
+                        String[] cmd = {"/usr/bin/inkscape", archivoSVG, "-A", archivoPDF}; //Comando de apagado en windows
+                        // for i in D*.svg;do inkscape "$i" -A "$i".pdf;done                      
                         Runtime.getRuntime().exec(cmd);
                     } catch (IOException ioe) {
                         System.out.println(ioe);
                     }
-
                 }
             }
-            //svg_URI_input = Paths.get(archivoSVG).toUri().toURL().toString();
-//svg2png(archivoSVG);
         } catch (IOException | TemplateException e) {
             e.printStackTrace();
         }
@@ -325,44 +318,6 @@ public class DiplomasEventoGOU extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /*
-         * Set the Nimbus look and feel
-         */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-         * default look and feel. For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DiplomasEventoGOU.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DiplomasEventoGOU.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DiplomasEventoGOU.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DiplomasEventoGOU.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /*
-         * Create and display the form
-         */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
